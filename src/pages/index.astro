@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Providers from "../components/Providers.astro";
+import SlotsSection from "../components/SlotsSection.astro";
+import BonusBanner from "../components/BonusBanner.astro";
+import BestSlots from "../components/BestSlots.astro";
+import SeoContent from "../components/SeoContent.astro";
+import Faq from "../components/Faq.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+import { faqs } from "../data/faq";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout title={site.title} description={site.description}>
+  <Header />
+  <main>
+    <Hero />
+    <Providers />
+    <SlotsSection />
+    <BonusBanner />
+    <BestSlots />
+    <SeoContent />
+    <Faq />
+  </main>
+  <Footer />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)}></script>
+</BaseLayout>

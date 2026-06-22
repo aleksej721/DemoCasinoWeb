@@ -1,0 +1,85 @@
+---
+import { site } from "../data/site";
+import TrackButton from "./TrackButton.astro";
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="footer-logo" href="/">
+        <span>A</span>
+        <strong>{site.brand}</strong>
+      </a>
+      <p class="muted">
+        Demo Astro template for fast casino/affiliate landing page production. Not a real casino.
+      </p>
+    </div>
+
+    <div class="footer-actions">
+      <TrackButton href={site.links.register} text="Join now" event="footer_register" />
+      <TrackButton href={site.links.bonus} text="Claim bonus" event="footer_bonus" />
+    </div>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+      {site.legal.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+  <div class="container copyright">
+    <p>Copyright {site.year} © {site.brand}. Portfolio demo only.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 0 24px;
+    background: #070711;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .footer-logo span {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    font-weight: 800;
+  }
+
+  .footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-links {
+    display: grid;
+    gap: 8px;
+    color: var(--muted);
+  }
+
+  .copyright {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1.2fr auto 1fr;
+      align-items: start;
+    }
+  }
+</style>

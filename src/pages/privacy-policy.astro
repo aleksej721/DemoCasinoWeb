@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={`Privacy Policy | ${site.brand}`} description={`Privacy policy demo page for ${site.brand}.`}>
+  <Header />
+  <main class="container section policy">
+    <h1>Privacy Policy</h1>
+    <p>This is a placeholder policy page for the Astro demo. Replace it with market-approved legal copy.</p>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .policy {
+    min-height: 48vh;
+  }
+</style>

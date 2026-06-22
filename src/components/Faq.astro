@@ -1,0 +1,65 @@
+---
+import { faqs } from "../data/faq";
+---
+
+<section class="section">
+  <div class="container faq-wrap" itemscope itemtype="https://schema.org/FAQPage">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <details>
+            <summary>
+              <h3 itemprop="name">{faq.question}</h3>
+            </summary>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <p itemprop="text">{faq.answer}</p>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-wrap {
+    max-width: 980px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .faq-item {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+  }
+
+  details {
+    padding: 0 18px;
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 18px 0;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  details p {
+    color: var(--muted);
+    padding-bottom: 18px;
+  }
+</style>

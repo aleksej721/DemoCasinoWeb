@@ -1,0 +1,122 @@
+---
+import { bestSlots } from "../data/slots";
+import TrackButton from "./TrackButton.astro";
+---
+
+<section class="section">
+  <div class="container">
+    <h2>Best slot offers</h2>
+    <div class="best-list">
+      {bestSlots.map((slot) => (
+        <article class="best-card">
+          <div class="rating">
+            <strong>{slot.rating}</strong>
+            <span>★★★★★</span>
+            <small>{slot.votes} votes</small>
+          </div>
+          <div class="thumb">
+            <img src={slot.image} alt={slot.title} />
+          </div>
+          <div class="best-copy">
+            <h3>{slot.title}</h3>
+            <p>{slot.text}</p>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Offer</td>
+                  <td>{slot.bonus}</td>
+                </tr>
+                <tr>
+                  <td>Type</td>
+                  <td>Demo data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="best-actions">
+            <TrackButton href={slot.link} text="Play for real" event="best_slot_real" />
+            <TrackButton href={slot.link} text="Demo play" variant="secondary" event="best_slot_demo" />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .best-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  .best-card {
+    display: grid;
+    gap: 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--panel);
+  }
+
+  .rating {
+    display: grid;
+    gap: 2px;
+  }
+
+  .rating strong {
+    font-size: 1.8rem;
+  }
+
+  .rating span {
+    color: #ffcc01;
+    letter-spacing: 0.05em;
+  }
+
+  .rating small {
+    color: var(--muted);
+  }
+
+  .thumb {
+    display: grid;
+    min-height: 120px;
+    place-items: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff3f55, #312e81);
+  }
+
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .best-copy p {
+    color: var(--muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #10101c;
+  }
+
+  td {
+    border-bottom: 1px solid var(--line);
+    padding: 10px;
+  }
+
+  .best-actions {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+  }
+
+  @media (min-width: 900px) {
+    .best-card {
+      grid-template-columns: 110px 140px minmax(0, 1fr) 220px;
+      align-items: center;
+    }
+  }
+</style>

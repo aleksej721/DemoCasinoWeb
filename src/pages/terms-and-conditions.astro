@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={`Terms & Conditions | ${site.brand}`} description={`Terms page for ${site.brand}.`}>
+  <Header />
+  <main class="container section policy">
+    <h1>Terms & Conditions</h1>
+    <p>Placeholder terms page. Production copy should be reviewed before publishing.</p>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .policy {
+    min-height: 48vh;
+  }
+</style>

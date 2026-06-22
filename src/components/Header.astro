@@ -1,0 +1,77 @@
+---
+import { site } from "../data/site";
+import TrackButton from "./TrackButton.astro";
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label={`${site.brand} home`}>
+      <span class="logo-mark">A</span>
+      <span>{site.brand}</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <TrackButton href={site.links.register} text="Join now" event="register" />
+      <TrackButton href={site.links.bonus} text="Claim bonus" event="bonus" />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(9, 9, 20, 0.86);
+    backdrop-filter: blur(14px);
+  }
+
+  .header-inner {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+  }
+
+  .logo-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  }
+
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 18px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .header-actions {
+    display: none;
+    gap: 10px;
+  }
+
+  @media (min-width: 760px) {
+    .desktop-nav,
+    .header-actions {
+      display: flex;
+    }
+  }
+</style>

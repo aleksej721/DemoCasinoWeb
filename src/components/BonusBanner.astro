@@ -1,0 +1,128 @@
+---
+import { site } from "../data/site";
+import TrackButton from "./TrackButton.astro";
+---
+
+<section class="section">
+  <div class="container bonus-grid">
+    <div class="bonus-copy">
+      <h2>{site.bonusTitle}</h2>
+      <p>{site.bonusSummary}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Bonus</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Deposit match</td>
+            <td>250% up to 1,200 {site.currency}</td>
+          </tr>
+          <tr>
+            <td>Free spins</td>
+            <td>150 spins</td>
+          </tr>
+          <tr>
+            <td>Responsible play</td>
+            <td>18+ | Terms apply</td>
+          </tr>
+        </tbody>
+      </table>
+      <TrackButton href={site.links.bonus} text="Claim bonus now" event="bonus" />
+    </div>
+    <div class="bonus-art">
+      <img class="bonus-art-bg" src="/images/18.webp" alt="18+ background" />
+      <span>18+</span>
+      <strong>Play responsibly</strong>
+      <p>Legal and compliance messages should be configurable per geo.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bonus-grid {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+  }
+
+  .bonus-copy {
+    padding: clamp(24px, 4vw, 42px);
+  }
+
+  table {
+    width: 100%;
+    margin: 22px 0;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #10101c;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid var(--line);
+    padding: 13px 14px;
+    text-align: left;
+  }
+
+  th {
+    color: var(--brand-2);
+  }
+
+  .bonus-art {
+    position: relative;
+    display: grid;
+    min-height: 260px;
+    align-content: end;
+    gap: 8px;
+    padding: 28px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #22223a, #581c87 48%, #111827);
+  }
+
+  .bonus-art-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .bonus-art span,
+  .bonus-art strong,
+  .bonus-art p {
+    position: relative;
+    z-index: 1;
+  }
+
+  .bonus-art span {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+  }
+
+  .bonus-art p {
+    max-width: 360px;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  @media (min-width: 900px) {
+    .bonus-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+</style>

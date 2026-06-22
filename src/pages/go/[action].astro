@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { geoRedirects } from "../../data/geoRedirects";
+
+export function getStaticPaths() {
+  return ["register", "login", "app", "bonus"].map((action) => ({
+    params: { action }
+  }));
+}
+
+const { action } = Astro.params;
+const actionKey = action as "register" | "login" | "app" | "bonus";
+const fallbackUrl = geoRedirects.geos.global.offers[actionKey] ?? "https://example.com";
+---
+
+<BaseLayout title="Redirect demo" description="Geo redirect demo page.">
+  <main class="redirect-screen">
+    <section class="redirect-card">
+      <p class="eyebrow">Redirect demo</p>
+      <h1>Choosing offer for <code>/{action}</code></h1>
+      <p id="status">Checking browser language and selecting a demo offer...</p>
+      <a id="manual-link" href={fallbackUrl}>Continue manually</a>
+    </section>
+  </main>
+
+  <script is:inline define:vars={{ actionKey, geoRedirects, fallbackUrl }}>
+    const normalize = (value) => String(value || "").toLowerCase();
+    const browserLanguages = (navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language]
+    ).map(normalize);
+
+    let selectedGeo = geoRedirects.defaultGeo;
+
+    for (const [geo, config] of Object.entries(geoRedirects.geos)) {
+      if (geo === "global") continue;
+      const hints = config.localeHints.map(normalize);
+      const isMatch = browserLanguages.some((lang) =>
+        hints.some((hint) => lang === hint || lang.startsWith(`${hint.split("-")[0]}-`))
+      );
+      if (isMatch) {
+        selectedGeo = geo;
+        break;
+      }
+    }
+
+    const selectedConfig = geoRedirects.geos[selectedGeo] || geoRedirects.geos.global;
+    const target = selectedConfig.offers[actionKey] || fallbackUrl;
+    const status = document.querySelector("#status");
+    const manualLink = document.querySelector("#manual-link");
+
+    status.textContent = `Detected: ${selectedConfig.label}. Demo target: ${target}`;
+    manualLink.setAttribute("href", target);
+
+    // Portfolio safety: this demo does not auto-redirect.
+    // In production, this layer is usually handled server-side by an affiliate tracker.
+  </script>
+</BaseLayout>
+
+<style>
+  .redirect-screen {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    padding: 24px;
+  }
+
+  .redirect-card {
+    width: min(620px, 100%);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+    background: var(--panel);
+  }
+
+  .eyebrow {
+    color: var(--brand-2);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  code {
+    color: var(--brand-2);
+  }
+
+  a {
+    display: inline-flex;
+    margin-top: 12px;
+    color: var(--brand-2);
+    font-weight: 800;
+  }
+</style>

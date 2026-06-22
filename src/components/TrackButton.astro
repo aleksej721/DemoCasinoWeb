@@ -1,0 +1,15 @@
+---
+interface Props {
+  href: string;
+  text: string;
+  variant?: "main" | "secondary";
+  event?: string;
+  className?: string;
+}
+
+const { href, text, variant = "main", event = "cta", className = "" } = Astro.props;
+---
+
+<a class={`cta ${variant === "secondary" ? "secondary" : ""} ${className}`} href={href} data-event={event}>
+  <span>{text}</span>
+</a>

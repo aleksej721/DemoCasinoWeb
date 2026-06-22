@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={`Cookies Policy | ${site.brand}`} description={`Cookie policy page for ${site.brand}.`}>
+  <Header />
+  <main class="container section policy">
+    <h1>Cookies Policy</h1>
+    <p>Placeholder cookie policy page for this demo template.</p>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .policy {
+    min-height: 48vh;
+  }
+</style>

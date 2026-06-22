@@ -1,0 +1,75 @@
+---
+import { providers } from "../data/providers";
+---
+
+<section class="section">
+  <div class="container provider-panel">
+    <div class="section-head">
+      <h2>Game providers</h2>
+      <p class="muted">A reusable horizontal block for studio logos and short copy.</p>
+    </div>
+    <div class="provider-row" aria-label="Provider carousel">
+      {providers.map((provider) => (
+        <article class="provider-card">
+          <div class="provider-logo">{provider.name.slice(0, 2)}</div>
+          <h3>{provider.name}</h3>
+          <p>{provider.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .provider-panel {
+    border-radius: 8px;
+    padding: 28px;
+    background: var(--panel);
+  }
+
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .section-head p {
+    margin-bottom: 0;
+  }
+
+  .provider-row {
+    display: grid;
+    grid-auto-columns: minmax(240px, 1fr);
+    grid-auto-flow: column;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .provider-card {
+    min-height: 190px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--panel-2);
+    scroll-snap-align: start;
+  }
+
+  .provider-logo {
+    display: grid;
+    width: 58px;
+    height: 36px;
+    place-items: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #10101c;
+    color: var(--brand-2);
+    font-weight: 800;
+  }
+
+  .provider-card p {
+    color: var(--muted);
+  }
+</style>
